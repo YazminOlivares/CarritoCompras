@@ -11,6 +11,7 @@ export const Header = ({
 }) => {
 
     const [active, setActive] = useState(false);
+	const [notification, setNotification] = useState('');
     let contador = 0;
 
     const onDeleteProduct = product => {
@@ -22,19 +23,35 @@ export const Header = ({
         );
 
         setTotal( total - product.price );
-        setCountProducts( --countProducts );
+        setCountProducts( countProducts - product.quantity);
         setAllProducts( results );
 
+		setNotification(`Eliminado del carrito: ${product.name} (${product.quantity})`);
+
+		setTimeout(() => {
+			setNotification('');
+		}, 3000);
     };
 
     const onCleanCart = () => {
         setAllProducts([]);
         setTotal(0);
         setCountProducts(0);
+
+		setNotification('Carrito vaciado con éxito');
+
+		setTimeout(() => {
+			setNotification('');
+		}, 3000);
     };
 
     return(
         <header>
+			{notification && (
+				<div className="notificationR">
+					{notification}
+				</div>
+        	)}
             <h1>Tienda en Línea</h1>
 
             <div className="container-icon">
@@ -73,7 +90,7 @@ export const Header = ({
 												{product.quantity}
 											</span>
 											<p className='titulo-producto-carrito'>
-												{product.nameProduct}
+												{product.name}
 											</p>
 											<span className='precio-producto-carrito'>
 												${product.price}

@@ -12,6 +12,7 @@ export const ProductsList = ({
 
     const [data, setData] = useState([]); 
     const [loading, setLoading] = useState(true); 
+    const [notification, setNotification] = useState('');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -54,10 +55,21 @@ export const ProductsList = ({
         setTotal(total + product.price);
         setCountProducts(countProducts + 1);
 
+        setNotification(`Añadido al carrito: ${product.name}`);
+
+        setTimeout(() => {
+            setNotification('');
+        }, 3000);
+
     };
 
     return(
 		<div className='container-items'>
+      {notification && (
+          <div className="notification">
+              {notification}
+          </div>
+      )}
 			{data.map(product => (
 				<div className='item' key={product.id}>
 					<figure>
