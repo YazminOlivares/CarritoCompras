@@ -14,6 +14,7 @@ export const ProductsList = ({
     const [loading, setLoading] = useState(true); 
     const [notification, setNotification] = useState('');
 
+    
     useEffect(() => {
         const fetchProducts = async () => {
           try {
@@ -30,30 +31,36 @@ export const ProductsList = ({
         fetchProducts();
     }, []);
 
-    const onAddProduct = product => {
-        console.log(product);
-        addOneProduct("675114afbcea96a42f9693fa", [{
-            "productId": product._id,
-            "quantity": 1
+    const onAddProduct = async (product) => {
+
+        try{
+          await addOneProduct("675a5a9a1c0ee41d804c5ab5", [{
+              "productId": product._id,
+              "quantity": 1
           }]);
-
-        const existingProduct = allProducts.find(item => item._id === product._id);
-
-        if (existingProduct) {
-            
-            const updatedProducts = allProducts.map(item =>
-            item._id === product._id
-                ? { ...item, quantity: item.quantity + 1 } 
-                : item
-            );
-            setAllProducts(updatedProducts);
-        } else {
-
-            setAllProducts([...allProducts, { ...product, quantity: 1 }]);
+        } catch(error){
+            console.log("error: ", e);
+            return;
         }
 
-        setTotal(total + product.price);
-        setCountProducts(countProducts + 1);
+          const existingProduct = allProducts.find(item => item._id === product._id);
+
+          if (existingProduct) {
+              
+              const updatedProducts = allProducts.map(item =>
+              item._id === product._id
+                  ? { ...item, quantity: item.quantity + 1 } 
+                  : item
+              );
+              setAllProducts(updatedProducts);
+          } else {
+
+              setAllProducts([...allProducts, { ...product, quantity: 1 }]);
+          }
+
+          setTotal(total + product.price);
+          setCountProducts(countProducts + 1);
+      
 
         setNotification(`Añadido al carrito: ${product.name}`);
 
@@ -62,6 +69,14 @@ export const ProductsList = ({
         }, 3000);
 
     };
+
+    function CualCarro(carrito){
+      if(carrito.carrito === "nara"){
+        return <img src="https://firebasestorage.googleapis.com/v0/b/coches-9522d.firebasestorage.app/o/sedan.png?alt=media&token=6775238b-f11c-4e8b-9269-d9edae7ce692" alt={carrito.name} />
+      }else{
+        return <img src={carrito.carrito} alt={carrito.name} />
+      }
+    }
 
     return(
 		<div className='container-items'>
@@ -73,7 +88,7 @@ export const ProductsList = ({
 			{data.map(product => (
 				<div className='item' key={product.id}>
 					<figure>
-						<img src={product.images?.[0]} alt={product.name} />
+            <CualCarro carrito={product.images?.[0]}/>
 					</figure>
 					<div className='info-product'>
 						<h2>{product.name}</h2>

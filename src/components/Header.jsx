@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { getProducts,deleteOneProduct } from "../services/productsService";
+import React, { useState, useEffect } from "react";
+import { deleteOneProduct } from "../services/productsService";
+import { getUserShCart } from "../services/shCartService";
 
 export const Header = ({
     allProducts,
@@ -12,11 +13,12 @@ export const Header = ({
 
     const [active, setActive] = useState(false);
 	const [notification, setNotification] = useState('');
-    let contador = 0;
+	const [loading, setLoading] = useState(true);
 
+	
     const onDeleteProduct = product => {
 
-        deleteOneProduct('6751144abcea96a42f9693f8',product.id);
+        deleteOneProduct('675a5a9a1c0ee41d804c5ab5',product.id);
 
         const results = allProducts.filter(
             item => item.id !== product.id
@@ -44,6 +46,39 @@ export const Header = ({
 			setNotification('');
 		}, 3000);
     };
+
+	useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            const pro = await getUserShCart("675a5a541c0ee41d804c5ab3");
+			let productsArray = [];
+			let cont = 0;
+			let to = 0;
+			pro.map(producto => {
+				productsArray.push(
+					{
+						id: producto.product._id,
+						name: producto.product.name,
+						price: producto.product.price,
+						images: [producto.product.images],
+						quantity: producto.quantity
+					}
+				)
+				cont = cont + producto.quantity;
+				to = to + producto.product.price;
+			});
+			setCountProducts(cont);
+            setAllProducts(productsArray); 
+			setTotal(to);
+          } catch (error) {
+            console.error("Error al obtener los productos del carrito:", error);
+          } finally {
+            setLoading(false); 
+          }
+        };
+    
+        fetchProducts();
+    }, []);
 
     return(
         <header>

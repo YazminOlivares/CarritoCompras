@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 
 export async function getProducts() {
 
@@ -38,7 +37,7 @@ export async function getProducts() {
 
 }
 
-export async function deleteOneProduct(userId, productId) {
+export async function deleteOneProduct(cartId, productId) {
     
     try {
 
@@ -48,16 +47,19 @@ export async function deleteOneProduct(userId, productId) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ query: 
-            `mutation {
-                removeItemFromCart(userId: ${userId}, productId: ${productId}) {
+            `mutation RemoveOneItemFromCart($cartId: ID!, $productId: ID!) {
+                removeOneItemFromCart(cartId: $cartId, productId: $productId) {
                     _id
                 }
-            }` 
+            }`,
+            variables: {
+                "cartId": cartId,
+                "productId": productId
+            } 
         })
     });
 
         const result = await resp.json();
-        console.log(result.data);
         return result.data;
 
     }catch(e) {
@@ -67,30 +69,34 @@ export async function deleteOneProduct(userId, productId) {
 
 }
 
-export async function addOneProduct(userId, input) {
-    console.log(input);
+export async function addOneProduct(cartId, input) {
+
     try {
 
-        const resp = await fetch('http://localhost:4000/', {
+        const resp = await fetch('https://proyecto-unidad-2-servicios-web.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ query: 
-                `mutation AddItemToCart($userId: ID!, $input: [AddToCartInput!]!) {
-                    addItemToCart(userId: $userId, input: $input2) {
+                `mutation AddItemToCart($cartId: ID!, $input: [AddToCartInput!]!) {
+                    addItemToCart(cartId: $cartId, input: $input) {
                         _id
                     }
                 }`,
                 variables: {
-                    "userId": userId,
-                    "input": input
+                    "cartId": cartId,
+                    "input": [{
+                        
+                        "productId": input[0].productId,
+                        "quantity": 1
+                          
+                    }]
                 }
             })
         });
 
         const result = await resp.json();
-        console.log(result.data);
         return result.data;
 
     }catch(e) {
