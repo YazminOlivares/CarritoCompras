@@ -47,6 +47,10 @@ export const Header = ({
 		}, 3000);
     };
 
+	const paymentBtn = () => {
+		
+	}
+
 	useEffect(() => {
         const fetchProducts = async () => {
           try {
@@ -155,8 +159,8 @@ export const Header = ({
 								<span className='total-pagar'>${total}</span>
 							</div>
 
-							<button className='btn-clear-all' onClick={onCleanCart}>
-								Vaciar Carrito
+							<button className='btn-clear-all' onClick={paymentBtn}>
+								Comprar Ahora
 							</button>
 						</>
 					) : (
