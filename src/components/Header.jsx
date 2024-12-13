@@ -10,7 +10,8 @@ export const Header = ({
     total,
     setTotal,
     countProducts,
-    setCountProducts
+    setCountProducts,
+	userId
 }) => {
 
     const [active, setActive] = useState(false);
@@ -65,7 +66,7 @@ export const Header = ({
         const fetchProducts = async () => {
 		  setLoading(true);
           try {
-            const pro = await getUserShCart("675a5a541c0ee41d804c5ab3");
+            const pro = await getUserShCart(userId);
 			console.log(pro);
 			if(pro){
 				setInfoCart(pro);
@@ -90,7 +91,7 @@ export const Header = ({
 				setAllProducts(productsArray); 
 				setTotal(to);
 			}else{
-				const idCart = await createNewShCart("675a5a541c0ee41d804c5ab3");
+				const idCart = await createNewShCart(userId);
 				console.log("creo nuevo: ",idCart);
 				setInfoCart(idCart);
 			}
