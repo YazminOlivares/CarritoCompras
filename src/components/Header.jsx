@@ -61,7 +61,6 @@ export const Header = ({
 			setNotification2('');
 		}, 3000);
 		setReload(!reload);
-		setCreated(false);
 	}
 
 	useEffect(() => {
@@ -93,14 +92,16 @@ export const Header = ({
 				setAllProducts(productsArray); 
 				setTotal(to);
 			}else if(!created){
+				
 				const idCart = await createNewShCart(userId);
-				console.log("creo nuevo: ",idCart);
+				console.log("creo nuevo: ",idCart.createShoppingCar._id);
 				setCountProducts(0);
 				setAllProducts([]); 
 				setTotal(0);
-				setInfoCart([{productos:[], _id: idCart.createShoppingCar._id}]);
+				setInfoCart([]);
 				setCreated(true);
-			}
+				console.log("nuevos datos:", infoCart);
+			} 
           } catch (error) {
             console.error("Error al obtener los productos del carrito:", error);
           } finally {
