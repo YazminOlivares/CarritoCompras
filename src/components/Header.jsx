@@ -10,7 +10,8 @@ export const Header = ({
     total,
     setTotal,
     countProducts,
-    setCountProducts
+    setCountProducts,
+	userId
 }) => {
 
     const [active, setActive] = useState(false);
@@ -67,7 +68,7 @@ export const Header = ({
         const fetchProducts = async () => {
 		  setLoading(true);
           try {
-            const pro = await getUserShCart("675a5a541c0ee41d804c5ab3");
+            const pro = await getUserShCart(userId);
 			console.log(pro);
 			if(pro){
 				setInfoCart(pro);
@@ -97,7 +98,7 @@ export const Header = ({
 				setCountProducts(0);
 				setAllProducts([]); 
 				setTotal(0);
-				setInfoCart([{productos:[], _id:idCart.createShoppingCar._id}]);
+				setInfoCart([{productos:[], _id: idCart.createShoppingCar._id}]);
 				setCreated(true);
 			}
           } catch (error) {

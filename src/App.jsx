@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Header } from './components/Header';
 import { ProductsList } from './components/ProductsList';
+import Login from './components/LoginForm';
 
 function App() {
 
@@ -8,10 +9,17 @@ function App() {
   const [infoCart, setInfoCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
+  const [user, setUser] = useState(null); // Estado global para el usuario
+
+  // Función para manejar el usuario encontrado
+  const handleLogin = (loggedInUser) => {
+    setUser(loggedInUser);
+  };
 
   return (
     <>
-      <Header 
+      {user ? (
+        <><Header
           allProducts={allProducts}
           setAllProducts={setAllProducts}
           infoCart={infoCart}
@@ -20,17 +28,21 @@ function App() {
           setTotal={setTotal}
           countProducts={countProducts}
           setCountProducts={setCountProducts}
-      />
-      <ProductsList 
-          allProducts={allProducts}
-          setAllProducts={setAllProducts}
-          infoCart={infoCart}
-          setInfoCart={setInfoCart}
-          total={total}
-          setTotal={setTotal}
-          countProducts={countProducts}
-          setCountProducts={setCountProducts}
-      />
+          userId={user._id} />
+          
+          <ProductsList
+            allProducts={allProducts}
+            setAllProducts={setAllProducts}
+            infoCart={infoCart}
+            setInfoCart={setInfoCart}
+            total={total}
+            setTotal={setTotal}
+            countProducts={countProducts}
+            setCountProducts={setCountProducts} /></>
+      ) : (
+        <Login onLogin={handleLogin} /> // Pasamos el manejador al Login
+      )}
+      
     </>
   )
 }

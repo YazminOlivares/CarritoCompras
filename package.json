@@ -14,7 +14,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-relay": "^18.2.0",
-    "relay-compiler": "^18.2.0"
+    "relay-compiler": "^18.2.0",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
