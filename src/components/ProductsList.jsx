@@ -76,7 +76,7 @@ export const ProductsList = ({
 
     function CualCarro(carrito){
       if(carrito.carrito === "nara"){
-        return <img src="https://firebasestorage.googleapis.com/v0/b/coches-9522d.firebasestorage.app/o/sedan.png?alt=media&token=6775238b-f11c-4e8b-9269-d9edae7ce692" alt={carrito.name} />
+        return <img src="https://img.freepik.com/vector-gratis/coche-sedan-blanco-vector-fondo-negro_53876-67369.jpg" alt={carrito.name} />
       }else{
         return <img src={carrito.carrito} alt={carrito.name} />
       }

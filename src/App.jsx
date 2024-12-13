@@ -7,8 +7,8 @@ function App() {
 
   const [allProducts, setAllProducts] = useState([]);
   const [infoCart, setInfoCart] = useState([]);
-	const [total, setTotal] = useState(0);
-	const [countProducts, setCountProducts] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [countProducts, setCountProducts] = useState(0);
   const [user, setUser] = useState(null); // Estado global para el usuario
 
   // Función para manejar el usuario encontrado
@@ -29,7 +29,7 @@ function App() {
           countProducts={countProducts}
           setCountProducts={setCountProducts}
           userId={user._id} />
-
+          
           <ProductsList
             allProducts={allProducts}
             setAllProducts={setAllProducts}
