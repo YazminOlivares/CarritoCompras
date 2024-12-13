@@ -18,6 +18,7 @@ export const Header = ({
 	const [notification2, setNotification2] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [reload, setReload] = useState(false);
+	const [created, setCreated] = useState(false);
 
 	
     const onDeleteProduct = async (product) => {
@@ -59,6 +60,7 @@ export const Header = ({
 			setNotification2('');
 		}, 3000);
 		setReload(!reload);
+		setCreated(false);
 	}
 
 	useEffect(() => {
@@ -89,10 +91,14 @@ export const Header = ({
 				setCountProducts(cont);
 				setAllProducts(productsArray); 
 				setTotal(to);
-			}else{
-				const idCart = await createNewShCart("675a5a541c0ee41d804c5ab3");
+			}else if(!created){
+				const idCart = await createNewShCart(userId);
 				console.log("creo nuevo: ",idCart);
-				setInfoCart(idCart);
+				setCountProducts(0);
+				setAllProducts([]); 
+				setTotal(0);
+				setInfoCart([{productos:[], _id:idCart.createShoppingCar._id}]);
+				setCreated(true);
 			}
           } catch (error) {
             console.error("Error al obtener los productos del carrito:", error);
