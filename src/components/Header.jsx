@@ -55,11 +55,11 @@ export const Header = ({
 	const paymentBtn = async () => {
 		console.log(infoCart);
 		await payShCart(infoCart._id);
+		setReload(!reload);
 		setNotification2('Pago realizado con exito')
 		setTimeout(() => {
 			setNotification2('');
 		}, 3000);
-		setReload(!reload);
 	}
 
 	useEffect(() => {
@@ -93,6 +93,9 @@ export const Header = ({
 			}else{
 				const idCart = await createNewShCart(userId);
 				console.log("creo nuevo: ",idCart);
+				setCountProducts(0);
+				setAllProducts([]); 
+				setTotal(0);
 				setInfoCart(idCart);
 			}
           } catch (error) {
