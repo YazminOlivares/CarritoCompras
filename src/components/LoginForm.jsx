@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState,  useRef, useEffect } from 'react';
 import { getAllUsers } from '../services/usersService';
 import styled from 'styled-components';

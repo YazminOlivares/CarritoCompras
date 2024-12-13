@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { deleteOneProduct } from "../services/productsService";
 import { getUserShCart, payShCart, createNewShCart } from "../services/shCartService";
@@ -55,6 +57,13 @@ export const Header = ({
 	const paymentBtn = async () => {
 		console.log(infoCart);
 		await payShCart(infoCart._id);
+
+		const newCart = await createNewShCart(userId);
+		setInfoCart(newCart);
+		setAllProducts([]);
+        setTotal(0);
+        setCountProducts(0);
+
 		setReload(!reload);
 		setNotification2('Pago realizado con exito')
 		setTimeout(() => {
@@ -67,7 +76,7 @@ export const Header = ({
 		  setLoading(true);
           try {
             const pro = await getUserShCart(userId);
-			console.log(pro);
+			console.log('asdasdasdasdasd: wowowowow: ', pro);
 			if(pro){
 				setInfoCart(pro);
 				let productsArray = [];

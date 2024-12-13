@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { addOneProduct, getProducts } from "../services/productsService";
 
@@ -41,7 +43,7 @@ export const ProductsList = ({
               "quantity": 1
           }]);
         } catch(error){
-            console.log("error: ", e);
+            console.log("error: ", error);
             return;
         }
 
