@@ -5,14 +5,17 @@ import { ProductsList } from './components/ProductsList';
 function App() {
 
   const [allProducts, setAllProducts] = useState([]);
-	const [total, setTotal] = useState(0);
-	const [countProducts, setCountProducts] = useState(0);
+  const [infoCart, setInfoCart] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [countProducts, setCountProducts] = useState(0);
 
   return (
     <>
       <Header 
           allProducts={allProducts}
           setAllProducts={setAllProducts}
+          infoCart={infoCart}
+          setInfoCart={setInfoCart}
           total={total}
           setTotal={setTotal}
           countProducts={countProducts}
@@ -21,6 +24,8 @@ function App() {
       <ProductsList 
           allProducts={allProducts}
           setAllProducts={setAllProducts}
+          infoCart={infoCart}
+          setInfoCart={setInfoCart}
           total={total}
           setTotal={setTotal}
           countProducts={countProducts}

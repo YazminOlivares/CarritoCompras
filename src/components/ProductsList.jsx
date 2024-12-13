@@ -4,6 +4,8 @@ import { addOneProduct, getProducts } from "../services/productsService";
 export const ProductsList = ({
     allProducts,
     setAllProducts,
+    infoCart, 
+	  setInfoCart,
     countProducts,
     setCountProducts,
     total,
@@ -34,7 +36,7 @@ export const ProductsList = ({
     const onAddProduct = async (product) => {
 
         try{
-          await addOneProduct("675a5a9a1c0ee41d804c5ab5", [{
+          await addOneProduct(infoCart._id, [{
               "productId": product._id,
               "quantity": 1
           }]);

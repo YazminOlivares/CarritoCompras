@@ -3,7 +3,7 @@ export async function getProducts() {
 
     try {
 
-        const resp = await fetch('https://proyecto-unidad-2-servicios-web.onrender.com', {
+        const resp = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -23,6 +23,7 @@ export async function getProducts() {
                     name
                     price
                     quantity
+                    facturapi
                 }
             }` })
         });
@@ -41,7 +42,7 @@ export async function deleteOneProduct(cartId, productId) {
     
     try {
 
-        const resp = await fetch('https://proyecto-unidad-2-servicios-web.onrender.com', {
+        const resp = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -73,7 +74,7 @@ export async function addOneProduct(cartId, input) {
 
     try {
 
-        const resp = await fetch('https://proyecto-unidad-2-servicios-web.onrender.com', {
+        const resp = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

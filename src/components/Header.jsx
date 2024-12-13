@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { deleteOneProduct } from "../services/productsService";
-import { getUserShCart } from "../services/shCartService";
+import { getUserShCart, payShCart, createNewShCart } from "../services/shCartService";
 
 export const Header = ({
     allProducts,
     setAllProducts,
+	infoCart, 
+	setInfoCart,
     total,
     setTotal,
     countProducts,
@@ -13,12 +15,14 @@ export const Header = ({
 
     const [active, setActive] = useState(false);
 	const [notification, setNotification] = useState('');
+	const [notification2, setNotification2] = useState('');
 	const [loading, setLoading] = useState(true);
+	const [reload, setReload] = useState(false);
 
 	
-    const onDeleteProduct = product => {
+    const onDeleteProduct = async (product) => {
 
-        deleteOneProduct('675a5a9a1c0ee41d804c5ab5',product.id);
+        await deleteOneProduct( infoCart._id, product.id );
 
         const results = allProducts.filter(
             item => item.id !== product.id
@@ -47,33 +51,49 @@ export const Header = ({
 		}, 3000);
     };
 
-	const paymentBtn = () => {
-		
+	const paymentBtn = async () => {
+		console.log(infoCart);
+		await payShCart(infoCart._id);
+		setNotification2('Pago realizado con exito')
+		setTimeout(() => {
+			setNotification2('');
+		}, 3000);
+		setReload(!reload);
 	}
 
 	useEffect(() => {
         const fetchProducts = async () => {
+		  setLoading(true);
           try {
             const pro = await getUserShCart("675a5a541c0ee41d804c5ab3");
-			let productsArray = [];
-			let cont = 0;
-			let to = 0;
-			pro.map(producto => {
-				productsArray.push(
-					{
-						id: producto.product._id,
-						name: producto.product.name,
-						price: producto.product.price,
-						images: [producto.product.images],
-						quantity: producto.quantity
-					}
-				)
-				cont = cont + producto.quantity;
-				to = to + producto.product.price;
-			});
-			setCountProducts(cont);
-            setAllProducts(productsArray); 
-			setTotal(to);
+			console.log(pro);
+			if(pro){
+				setInfoCart(pro);
+				let productsArray = [];
+				let cont = 0;
+				let to = 0;
+				pro.productos.map(producto => {
+					productsArray.push(
+						{
+							id: producto.product._id,
+							name: producto.product.name,
+							price: producto.product.price,
+							images: [producto.product.images],
+							quantity: producto.quantity,
+							facturapi: producto.product.facturapi
+						}
+					)
+					cont = cont + producto.quantity;
+					to = to + producto.product.price;
+				});
+				setCountProducts(cont);
+				setAllProducts(productsArray); 
+				setTotal(to);
+			}else{
+				const idCart = await createNewShCart("675a5a541c0ee41d804c5ab3");
+				console.log("creo nuevo: ",idCart);
+				setInfoCart(idCart);
+			}
           } catch (error) {
             console.error("Error al obtener los productos del carrito:", error);
           } finally {
@@ -82,13 +102,18 @@ export const Header = ({
         };
     
         fetchProducts();
-    }, []);
+    }, [reload]);
 
     return(
         <header>
 			{notification && (
 				<div className="notificationR">
 					{notification}
+				</div>
+        	)}
+			{notification2 && (
+				<div className="notification">
+					{notification2}
 				</div>
         	)}
             <h1>Tienda en Línea</h1>
