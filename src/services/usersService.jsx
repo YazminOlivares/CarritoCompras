@@ -37,7 +37,7 @@ export async function getAllUsers() {
 
 export async function getUserById(userId) {
     try {
-        const resp = await fetch('https://proyecto-unidad-2-servicios-web.onrender.com', {
+        const resp = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
