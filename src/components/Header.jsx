@@ -8,7 +8,8 @@ export const Header = ({
     total,
     setTotal,
     countProducts,
-    setCountProducts
+    setCountProducts,
+	userId
 }) => {
 
     const [active, setActive] = useState(false);
@@ -50,7 +51,7 @@ export const Header = ({
 	useEffect(() => {
         const fetchProducts = async () => {
           try {
-            const pro = await getUserShCart("675a5a541c0ee41d804c5ab3");
+            const pro = await getUserShCart(userId);
 			let productsArray = [];
 			let cont = 0;
 			let to = 0;
