@@ -110,8 +110,9 @@ const LoginForm = ({ onLogin }) => {
 
 
     const FormContainer = styled.div`
-        background-color: transparent;
-        border:none;
+        background-color: #D9D9D9;
+        border:1px;
+        box-shadow: 15px 10px 30px rgba(0, 31, 63, 0.9);
         margin-left: 5%;
         margin-right: 7%;
         padding: 40px 30px;
