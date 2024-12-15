@@ -1,4 +1,4 @@
-import React, { useState,  useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { getAllUsers } from '../services/usersService';
 import styled from 'styled-components';
 
@@ -11,7 +11,6 @@ const LoginForm = ({ onLogin }) => {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
-    // useEffect para mantener el foco en los input
     useEffect(() => {
         if (emailRef.current) {
             emailRef.current.focus();
@@ -24,6 +23,20 @@ const LoginForm = ({ onLogin }) => {
         }
     }, [password]);
 
+    useEffect(() => {
+        const originalStyles = document.body.style.cssText;
+    
+        // Quita restricciones de ancho
+        document.body.style.cssText = `
+            max-width: 100%;
+            overflow: hidden;
+        `;
+    
+        return () => {
+            document.body.style.cssText = originalStyles;
+        };
+    }, []);
+    
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
@@ -59,79 +72,120 @@ const LoginForm = ({ onLogin }) => {
     };
 
     const Container = styled.div`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f4f7fc;
-  `;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        position: relative;
+    `;
 
-  const FormContainer = styled.div`
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
+    const Background = styled.div`
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('https://png.pngtree.com/background/20240730/original/pngtree-close-up-3d-illustration-of-a-car-instrument-panel-with-speedometer-picture-image_9906635.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: brightness(0.5);
+        z-index: -1;
+    `;
 
-      h2 {
-          text-align: center;
-          margin-bottom: 20px;
-          color: #333;
-          font-size: 24px;
-      }
-  `;
+    const FormContainer = styled.div`
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 380px;
+        transition: transform 0.3s ease;
+        filter: brightness(1.0);
 
-  const InputGroup = styled.div`
-      margin-bottom: 20px;
-  `;
+        &:hover {
+            transform: scale(1.03);
+        }
 
-  const InputField = styled.input`
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-  `;
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 26px;
+            color: #222;
+            font-weight: 600;
+        }
+    `;
 
-  const SubmitButton = styled.button`
-      width: 100%;
-      padding: 14px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    const InputGroup = styled.div`
+        margin-bottom: 20px;
 
-      &:hover {
-          background-color: #0056b3;
-      }
-  `;
+        label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+        }
+    `;
 
-  const ErrorMessage = styled.p`
-      color: #e74c3c;
-      font-size: 14px;
-      text-align: center;
-  `;
+    const InputField = styled.input`
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 16px;
+        border: 1px solid #dcdcdc;
+        border-radius: 8px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-  const WelcomeMessage = styled.p`
-      color: #2ecc71;
-      font-size: 16px;
-      text-align: center;
-  `;
+        &:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 4px rgba(26, 115, 232, 0.4);
+            outline: none;
+        }
+    `;
+
+    const SubmitButton = styled.button`
+        width: 100%;
+        padding: 14px 20px;
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    `;
+
+    const ErrorMessage = styled.p`
+        color: #e74c3c;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 15px;
+    `;
+
+    const WelcomeMessage = styled.p`
+        color: #27ae60;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 15px;
+        font-weight: bold;
+    `;
 
     return (
         <Container>
+            <Background />
             <FormContainer>
                 <h2>Iniciar Sesión</h2>
                 <form onSubmit={handleSubmit}>
                     <InputGroup>
-                        <label>Correo electrónico</label>
+                        <label htmlFor='email'>Correo electrónico</label>
                         <InputField
                             ref={emailRef} 
                             type="email"
+                            id='email'
                             value={email}
                             onChange={handleEmailChange}
                             required
@@ -139,9 +193,10 @@ const LoginForm = ({ onLogin }) => {
                     </InputGroup>
 
                     <InputGroup>
-                        <label>Contraseña</label>
+                        <label htmlFor='pass'>Contraseña</label>
                         <InputField
                             ref={passwordRef}
+                            id='pass'
                             type="password"
                             value={password}
                             onChange={handlePasswordChange} 

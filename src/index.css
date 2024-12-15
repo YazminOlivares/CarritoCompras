@@ -8,15 +8,37 @@
 
 body {
 	margin: 0 auto;
+	margin-top: 100p;
 	max-width: 88%;
 	color: #333333; 
-	background-color: #fbfbfb;
+	background: url('https://cdn.pixabay.com/photo/2023/07/29/08/02/road-8156418_1280.jpg') no-repeat center center fixed;
+	background-size: cover;
+	filter: brightness(0.6);
 }
 
-h1, h2, h3 {
+h1 {
+	font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+	font-size: 3rem;
+	color: #001F3F;
+	align-self: flex-start;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+	margin-left: 1.8rem;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+h1:hover {
+    color: #333333;
+    transform: scale(1.05);
+}
+
+
+h2, h3 {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
 	align-self: flex-end;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 p, span, .product-description {
@@ -24,32 +46,32 @@ p, span, .product-description {
     font-weight: 400;
     font-size: 16px; 
 }
+
 button, .add-to-cart-btn {
     font-family: 'Montserrat', sans-serif;
     text-decoration-color: #FFFFFF;
     font-size: 14px;
 }
 
-/* Íconos */
 .icon-cart {
 	width: 50px;
 	height: 50px;
-	stroke: #333333; /* Gris oscuro */
+	stroke: #333333;
 }
 
 .icon-cart:hover {
 	cursor: pointer;
 }
 
-/* Imágenes */
 img {
 	max-width: 100%;
 }
 
-/* Header */
 header {
 	display: flex;
 	justify-content: space-between;
+	align-content: center;
+	align-items: center;
 	padding: 30px 0 40px 0;
 }
 
@@ -75,7 +97,6 @@ header {
 	font-size: 15px;
 }
 
-/* Carrito */
 .container-cart-products {
 	position: absolute;
 	top: 50px;
@@ -161,9 +182,9 @@ header {
 
 .item {
 	border-radius: 10px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-	background: linear-gradient(180deg, #F5F5F5, #cecece);;
+	background: linear-gradient(180deg, #F5F5F5, #cecece);
 }
 
 .item:hover {
@@ -218,7 +239,6 @@ header {
 	transform: scale(1.03);
 }
 
-/* Vacío */
 .cart-empty {
 	padding: 20px;
 	text-align: center;
@@ -229,7 +249,6 @@ header {
 	display: none;
 }
 
-/* Botón de limpiar */
 .btn-clear-all {
 	border: none;
 	background-color: #001F3F; 
@@ -250,7 +269,6 @@ header {
 	transform: scale(1.03);
 }
 
-/* Notificaciones */
 .notification {
 	position: fixed;
 	top: 20px;
@@ -278,7 +296,6 @@ header {
 	animation: fade-in-out 3s forwards;
 }
 
-/* Animaciones */
 @keyframes fade-in-out {
 	0% { opacity: 0; }
 	10% { opacity: 1; }
