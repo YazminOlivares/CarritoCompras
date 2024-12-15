@@ -110,12 +110,12 @@ const LoginForm = ({ onLogin }) => {
 
 
     const FormContainer = styled.div`
-        background-color: #D9D9D9;
+        background-color: transparent;
+        border:none;
         margin-left: 5%;
         margin-right: 7%;
         padding: 40px 30px;
         border-radius: 12px;
-        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
         font-family: 'Roboto', sans-serif;
         height: 450px;
         width: 100%;
@@ -143,7 +143,7 @@ const LoginForm = ({ onLogin }) => {
         label {
             font-size: 1.2rem;
             color: #333333;
-            margin-bottom: 8px;
+            margin-bottom: 1.5rem;
             display: block;
         }
     `;
@@ -214,6 +214,7 @@ const LoginForm = ({ onLogin }) => {
                             value={email}
                             onChange={handleEmailChange}
                             required
+                            placeholder="Ingrese su correo electrónico"
                         />
                     </InputGroup>
 
@@ -226,6 +227,7 @@ const LoginForm = ({ onLogin }) => {
                             value={password}
                             onChange={handlePasswordChange} 
                             required
+                            placeholder="Ingrese su contraseña"
                         />
                     </InputGroup>
 
