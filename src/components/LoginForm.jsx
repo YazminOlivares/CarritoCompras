@@ -26,10 +26,13 @@ const LoginForm = ({ onLogin }) => {
     useEffect(() => {
         const originalStyles = document.body.style.cssText;
     
-        // Quita restricciones de ancho
+        // Quita restricciones del css general
         document.body.style.cssText = `
             max-width: 100%;
             overflow: hidden;
+            margin-top: 0;
+            margin-left:0;
+            padding-left:0;
         `;
     
         return () => {
@@ -76,42 +79,60 @@ const LoginForm = ({ onLogin }) => {
         justify-content: center;
         align-items: center;
         min-height: 100vh;
+        min-width: 100vh;
         position: relative;
+        background: linear-gradient(135deg, #001F3F 0%, #F5F5F5 100%);
+        margin:0;
+        padding:0;
+        filter: brightness(0.8);
     `;
 
-    const Background = styled.div`
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: url('https://png.pngtree.com/background/20240730/original/pngtree-close-up-3d-illustration-of-a-car-instrument-panel-with-speedometer-picture-image_9906635.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        filter: brightness(0.5);
-        z-index: -1;
-    `;
+    const LeftImageContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-right: 5%;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    margin-left: 0;
+    padding-left: 0;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+`;
+
 
     const FormContainer = styled.div`
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: #D9D9D9;
+        margin-left: 5%;
+        margin-right: 7%;
         padding: 40px 30px;
         border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+        font-family: 'Roboto', sans-serif;
+        height: 450px;
         width: 100%;
-        max-width: 380px;
+        max-width: 550px;
         transition: transform 0.3s ease;
         filter: brightness(1.0);
 
         &:hover {
-            transform: scale(1.03);
+            transform: none;
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 26px;
-            color: #222;
+            margin-bottom: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: #001F3F;
             font-weight: 600;
         }
     `;
@@ -120,8 +141,8 @@ const LoginForm = ({ onLogin }) => {
         margin-bottom: 20px;
 
         label {
-            font-size: 14px;
-            color: #666;
+            font-size: 1.2rem;
+            color: #333333;
             margin-bottom: 8px;
             display: block;
         }
@@ -130,7 +151,7 @@ const LoginForm = ({ onLogin }) => {
     const InputField = styled.input`
         width: 100%;
         padding: 12px 15px;
-        font-size: 16px;
+        font-size: 1rem;
         border: 1px solid #dcdcdc;
         border-radius: 8px;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -145,14 +166,16 @@ const LoginForm = ({ onLogin }) => {
     const SubmitButton = styled.button`
         width: 100%;
         padding: 14px 20px;
-        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        background: #001F3F;
         color: white;
         border: none;
         border-radius: 8px;
-        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
         font-weight: bold;
         cursor: pointer;
         transition: opacity 0.3s ease;
+        margin-top: 1.5rem;
 
         &:hover {
             opacity: 0.9;
@@ -160,14 +183,14 @@ const LoginForm = ({ onLogin }) => {
     `;
 
     const ErrorMessage = styled.p`
-        color: #e74c3c;
+        color: #dc3545;
         font-size: 14px;
         text-align: center;
         margin-top: 15px;
     `;
 
     const WelcomeMessage = styled.p`
-        color: #27ae60;
+        color: #28a745;
         font-size: 16px;
         text-align: center;
         margin-top: 15px;
@@ -176,7 +199,9 @@ const LoginForm = ({ onLogin }) => {
 
     return (
         <Container>
-            <Background />
+            <LeftImageContainer>
+                <img src="https://s1.1zoom.me/big0/147/Roads_Motion_Night_489310.jpg" alt="Carro" />
+            </LeftImageContainer>
             <FormContainer>
                 <h2>Iniciar Sesión</h2>
                 <form onSubmit={handleSubmit}>
