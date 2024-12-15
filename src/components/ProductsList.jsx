@@ -93,6 +93,7 @@ export const ProductsList = ({
             <CualCarro carrito={product.images?.[0]}/>
 					</figure>
 					<div className='info-product'>
+            <img src={product.brand.logo}/>
 						<h2>{product.name}</h2>
 						<p className='price'>${product.price}</p>
 						<button onClick={() => onAddProduct(product)}>

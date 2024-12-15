@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { deleteOneProduct } from "../services/productsService";
 import { getUserShCart, payShCart, createNewShCart } from "../services/shCartService";
+import {dropdown_wrapper,
+	dropdown_activator,
+	dropdown_item_list,
+	active as activeClass,
+	item_list,} from "./css/dropdown.module.css";
 
 export const Header = ({
     allProducts,
@@ -20,6 +25,10 @@ export const Header = ({
 	const [loading, setLoading] = useState(true);
 	const [reload, setReload] = useState(false);
 	const [created, setCreated] = useState(false);
+	const options = [{
+		slug: "/link1/",
+		anchor: "Link 1",
+	  },];
 
 	
     const onDeleteProduct = async (product) => {
@@ -63,12 +72,106 @@ export const Header = ({
 		setReload(!reload);
 	}
 
+	function Dropdown({ items = [], dropdownTitle }) {
+		const activatorRef = useRef(null);
+		const dropdownListRef = useRef(null);
+		const [isOpen, setIsOpen] = useState(false);
+	  
+		const clickHandler = () => {
+		  setIsOpen(!isOpen);
+		};
+	  
+		const keyHandler = (event) => {
+		  if (event.key === "Escape" && isOpen) {
+			setIsOpen(false);
+		  }
+		};
+	  
+		const clickOutsideHandler = (event) => {
+		  // Cerrar el dropdown si se hace clic fuera de él
+		  if (
+			dropdownListRef.current &&
+			!dropdownListRef.current.contains(event.target) &&
+			!activatorRef.current.contains(event.target)
+		  ) {
+			setIsOpen(false);
+		  }
+		};
+	  
+		useEffect(() => {
+		  // Agregar o eliminar eventos según el estado del dropdown
+		  if (isOpen) {
+			document.addEventListener("mousedown", clickOutsideHandler);
+			document.addEventListener("keyup", keyHandler);
+		  } else {
+			document.removeEventListener("mousedown", clickOutsideHandler);
+			document.removeEventListener("keyup", keyHandler);
+		  }
+	  
+		  // Limpieza
+		  return () => {
+			document.removeEventListener("mousedown", clickOutsideHandler);
+			document.removeEventListener("keyup", keyHandler);
+		  };
+		}, [isOpen]);
+	  
+		return (
+		  <div className={dropdown_wrapper}>
+			{/* Botón activador del dropdown */}
+			<button
+			  className={dropdown_activator}
+			  aria-haspopup="true"
+			  aria-expanded={isOpen}
+			  onClick={clickHandler}
+			  ref={activatorRef}
+			>
+			  {dropdownTitle}{" "}
+			  {isOpen ? (
+				<svg
+				  height="24"
+				  fill="rgb(70,70,70)"
+				  viewBox="0 0 24 24"
+				  width="24"
+				  xmlns="http://www.w3.org/2000/svg"
+				>
+				  <path d="m0 0h24v24h-24z" fill="none" />
+				  <path d="m7.41 15.41 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6z" />
+				</svg>
+			  ) : (
+				<svg
+				  height="24"
+				  fill="rgb(70,70,70)"
+				  viewBox="0 0 24 24"
+				  width="24"
+				  xmlns="http://www.w3.org/2000/svg"
+				>
+				  <path d="m0 0h24v24h-24z" fill="none" />
+				  <path d="m7.41 8.59 4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
+				</svg>
+			  )}
+			</button>
+	  
+			{/* Lista del dropdown */}
+			<ul
+			  ref={dropdownListRef}
+			  className={`${dropdown_item_list} ${isOpen ? activeClass : ""}`}
+			>
+			  {items.map((item, index) => (
+				<li className={item_list} key={index}>
+				  <a href={item.slug}>{item.anchor}</a>
+				</li>
+			  ))}
+			</ul>
+		  </div>
+		);
+	}
+
 	useEffect(() => {
         const fetchProducts = async () => {
 		  setLoading(true);
           try {
             const pro = await getUserShCart(userId);
-			console.log(pro);
+			console.log("Carrito: ",pro);
 			if(pro){
 				setInfoCart(pro);
 				let productsArray = [];
@@ -125,7 +228,7 @@ export const Header = ({
 				</div>
         	)}
             <h1>Tienda en Línea</h1>
-
+			<Dropdown dropdownTitle="Dropdown" items={options}/>
             <div className="container-icon">
                 <div className="container-cart-icon" onClick={() => setActive(!active)}>
                     <svg

@@ -8,7 +8,7 @@
 
 body {
 	margin: 0 auto;
-	max-width: 88%;
+	width: 88%;
 	color: #333333; 
 	background-color: #fbfbfb;
 }
@@ -17,17 +17,6 @@ h1, h2, h3 {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
 	align-self: flex-end;
-}
-
-p, span, .product-description {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 16px; 
-}
-button, .add-to-cart-btn {
-    font-family: 'Montserrat', sans-serif;
-    text-decoration-color: #FFFFFF;
-    font-size: 14px;
 }
 
 /* Íconos */
@@ -197,9 +186,9 @@ header {
 }
 
 .price {
-	font-size: 18px;
-	font-weight: 900;
-	color: #001F3F; 
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	font-weight: 500;
 }
 
 .info-product button {
@@ -211,6 +200,8 @@ header {
 	border-radius: 30px;
 	transition: all 0.3s ease;
 	font-size: 18px;
+	font-family: 'Montserrat', sans-serif;
+    text-decoration-color: #FFFFFF;
 }
 
 .info-product button:hover {
@@ -243,6 +234,8 @@ header {
 	cursor: pointer;
 	font-size: 18px;
 	transition: all .3s ease;
+	font-family: 'Montserrat', sans-serif;
+    text-decoration-color: #FFFFFF;
 }
 
 .btn-clear-all:hover {

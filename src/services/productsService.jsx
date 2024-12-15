@@ -13,7 +13,8 @@ export async function getProducts() {
                 products {
                     _id
                     brand {
-                    _id
+                        _id
+                        logo
                     }
                     cDate
                     category
@@ -29,6 +30,7 @@ export async function getProducts() {
         });
 
         const result = await resp.json();
+        console.log(result)
         return result.data;
 
     }catch(e) {
