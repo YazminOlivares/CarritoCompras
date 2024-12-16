@@ -15,6 +15,7 @@ export async function getProducts() {
                     brand {
                         _id
                         logo
+                        name
                     }
                     cDate
                     category
