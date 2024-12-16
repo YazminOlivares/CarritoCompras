@@ -32,7 +32,7 @@ const Profile = ({ user }) => {
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        background: linear-gradient(135deg, #001F3F 0%, #F5F5F5 100%);
+        background: linear-gradient(145deg, rgba(0,31,63,1) 0%, rgba(149,109,73,1) 33%, rgba(27,69,111,1) 66%, rgba(255,181,181,1) 100%);
         padding: 40px;
         gap: 30px;
         margin-top: 70px;
