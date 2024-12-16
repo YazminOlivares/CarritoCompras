@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { ProductsList } from './components/ProductsList';
 import Login from './components/LoginForm';
 import Profile from './components/Profile';
+import Register from './components/RegisterForm';
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
@@ -48,6 +49,8 @@ function App() {
         )} />
 
         <Route path="/profile" element={user ? <Profile user={user} /> : <Navigate to="/" />} />
+
+        <Route path='/Register' element={<Register />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

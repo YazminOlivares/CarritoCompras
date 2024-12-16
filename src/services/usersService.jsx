@@ -9,11 +9,15 @@ export async function getAllUsers() {
                 query: `
                     query {
                         users {
-                            _id
+                             _id
+                            nombreCompleto
                             email
                             password
-                            nombreCompleto
-                            tipoUsuario
+                            RFC
+                            direccion
+                            zipCode
+                            fechaRegistro
+                            telefono
                         }
                     }
                 `
@@ -79,5 +83,47 @@ export async function getUserById(userId) {
     } catch (e) {
         console.log("Error al obtener el usuario:", e);
         return e;
+    }
+}
+
+export async function registerUser(userData) {
+    try {
+        const response = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                query: `
+                mutation CreateUser($input: CreateUserInput!) {
+                    createUser(input: $input) {
+                        _id
+                        nombreCompleto
+                        email
+                        RFC
+                        direccion
+                        zipCode
+                        telefono
+                        tipoUsuario
+                        metodoPagoPreferido
+                    }
+                }`,
+                variables: {
+                    input: userData
+                }
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.errors) {
+            throw new Error(result.errors[0].message);
+        }
+
+        return result.data.createUser;
+
+    } catch (error) {
+        console.error("Error al registrar el usuario:"+ error);
+        throw error;
     }
 }

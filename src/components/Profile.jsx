@@ -4,6 +4,14 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Profile = ({ user }) => {
+
+    const fechaInt = parseInt(user.fechaRegistro, 10);
+
+    const timestamp = fechaInt;
+    const date = new Date(timestamp);
+
+    // obtener solo la fecha sin la hora
+    const fecha = date.toLocaleDateString(); 
     useEffect(() => {
         const originalStyles = document.body.style.cssText;
 
@@ -27,13 +35,13 @@ const Profile = ({ user }) => {
         background: linear-gradient(135deg, #001F3F 0%, #F5F5F5 100%);
         padding: 40px;
         gap: 30px;
-        margin-top: 75px;
+        margin-top: 70px;
         height: 100vh;
         font-family: 'Roboto', sans-serif;
     `;
 
     const LeftContainer = styled.div`
-        width: 600px;
+        width: 670px;
         height: 80%;
         text-align: center;
         background-color: #F5F5F5;
@@ -137,22 +145,22 @@ const Profile = ({ user }) => {
         <Container>
             <LeftContainer>
                 <Avatar src="https://i.pinimg.com/564x/9d/6b/9d/9d6b9db2dcb0526a09b89fb35d075c72.jpg"/>
-                <h3>Bienvenido Edgar!</h3>
+                <h3>Bienvenido {user.nombreCompleto}!</h3>
                 <p>Esta es la mejor tienda en linea de autos que puedas encontrar.</p>
             </LeftContainer>
             <RightContainer>
                 <ProfileDetail>
                     <h2>Datos Generales</h2>
                     <hr></hr>
-                    <p><span>Email:</span>edjovillelaca@ittepic.edu.mx</p>
-                    <p><span>Nombre Completo:</span>Edgar Joel Villela Castañeda</p>
-                    <p><span>Fecha de Registro:</span>2024-12-15</p>
-                    <p><span>RFC:</span>VICE0008251P8</p>
-                    <p><span>Dirección:</span>Boulevard Central 123</p>
-                    <p><span>Código postal:</span>63197</p>
+                    <p><span>Email:</span>{user.email}</p>
+                    <p><span>Nombre Completo:</span>{user.nombreCompleto}</p>
+                    <p><span>Fecha de Registro:</span>{fecha}</p>
+                    <p><span>RFC:</span>{user.RFC}</p>
+                    <p><span>Dirección:</span>{user.direccion}</p>
+                    <p><span>Código postal:</span>{user.zipCode}</p>
                     <h2>Datos De Contacto</h2>
                     <hr></hr>
-                    <p><span>Telefono Celular:</span>+52 311 202 1604</p>
+                    <p><span>Telefono Celular:</span>{user.telefono}</p>
                     <p><span>Facebook:</span><a href="https://www.facebook.com">www.facebook.com</a></p>
                     <p><span>Instagram:</span><a href="https://www.instagram.com">www.instagram.com</a></p>
                     <p><span>TikTok:</span><a href="https://www.tiktok.com">www.tiktok.com</a></p>
