@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { addOneProduct, getProducts } from "../services/productsService";
 
@@ -41,7 +43,7 @@ export const ProductsList = ({
               "quantity": 1
           }]);
         } catch(error){
-            console.log("error: ", e);
+            console.log("error: ", error);
             return;
         }
 
@@ -93,8 +95,16 @@ export const ProductsList = ({
             <CualCarro carrito={product.images?.[0]}/>
 					</figure>
 					<div className='info-product'>
-						<h2>{product.name}</h2>
-						<p className='price'>${product.price}</p>
+            <div className="info-info">
+              <div className="info-logo">
+                <h2>{product.brand.name}</h2>
+                <img src={product.brand.logo} id="logo"/>
+              </div>
+              <div className="info-info-info">
+                <h2>{product.name}</h2>
+                <p className='price'>${product.price}</p>
+              </div>
+            </div>
 						<button onClick={() => onAddProduct(product)}>
 							Añadir al carrito
 						</button>

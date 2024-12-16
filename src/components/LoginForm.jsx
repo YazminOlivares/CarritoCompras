@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
 import { getAllUsers } from '../services/usersService';
 import styled from 'styled-components';
@@ -159,7 +161,7 @@ const Container = styled.div`
         width: 100%;
         max-width: 550px;
         transition: transform 0.3s ease;
-        filter: brightness(1.0);
+        filter: brightness(1.05);
 
         &:hover {
             transform: none;

@@ -33,7 +33,7 @@ h1 a{
 }
 
 h1:hover {
-	color: #333333;
+	color: #F5F5F5;
 	transform: scale(1.05);
 }
 
@@ -41,7 +41,7 @@ h2, h3 {
 	font-family: 'Poppins', sans-serif;
 	font-weight: bold;
 	align-self: flex-end;
-	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+	font-size: 1.35rem;
 }
 
 p, span, .product-description {
@@ -50,15 +50,10 @@ p, span, .product-description {
 	font-size: 16px;
 }
 
-button, .add-to-cart-btn {
-	font-family: 'Montserrat', sans-serif;
-	font-size: 14px;
-}
-
 .icon-cart {
 	width: 50px;
 	height: 50px;
-	stroke: #333333;
+	stroke: #CECECE;
 }
 
 .icon-cart:hover {
@@ -101,8 +96,8 @@ header {
 	position: absolute;
 	top: 55%;
 	right: 0;
-	background-color: #001F3F;
-	color: #FFFFFF;
+	background-color: #bdb8b8;
+	color: #001F3F;
 	width: 30px;
 	height: 30px;
 	display: flex;
@@ -114,6 +109,7 @@ header {
 
 #contador-productos {
 	font-size: 15px;
+	font-weight: bold;
 }
 
 .container-cart-products {
@@ -218,7 +214,7 @@ header {
 
 .item img {
 	width: 100%;
-	height: 300px;
+	height: 200px;
 	object-fit: cover;
 	border-radius: 10px 10px 0 0;
 	transition: all 0.5s;
@@ -230,20 +226,51 @@ header {
 }
 
 .item:hover img {
-	transform: scale(1.2);
+	transform: scale(1.1);
 }
 
 .info-product {
-	padding: 15px 30px;
-	line-height: 2;
+	padding: 15px 20px;
+	line-height: 1.5;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
+#logo{
+	width: 4rem;
+	height: 90%;
+	object-fit: cover;
+	transition: all 0.5s;
+	filter: brightness(0.9);
+}
+
+.info-info{
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	justify-content: space-between;
+}
+
+.info-logo{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-left: 10px;
+	align-items: center;
+}
+
+.info-info-info{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 10px;
+}
+
 .price {
-	font-size: 18px;
-	font-weight: 600;
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	font-weight: 500;
 	color: #001F3F;
 }
 
@@ -256,6 +283,8 @@ header {
 	border-radius: 30px;
 	transition: all 0.3s ease;
 	font-size: 18px;
+	font-family: 'Montserrat', sans-serif;
+    text-decoration-color: #FFFFFF;
 }
 
 .info-product button:hover {
@@ -286,6 +315,8 @@ header {
 	cursor: pointer;
 	font-size: 18px;
 	transition: all .3s ease;
+	font-family: 'Montserrat', sans-serif;
+    text-decoration-color: #FFFFFF;
 }
 
 .btn-clear-all:hover {
