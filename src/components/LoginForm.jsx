@@ -1,27 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { getAllUsers } from '../services/usersService';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ onLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [user, setUser] = useState(null);
-
-    const emailRef = useRef(null);
-    const passwordRef = useRef(null);
-
-    useEffect(() => {
-        if (emailRef.current) {
-            emailRef.current.focus();
-        }
-    }, [email]);
-
-    useEffect(() => {
-        if (passwordRef.current) {
-            passwordRef.current.focus();
-        }
-    }, [password]);
 
     useEffect(() => {
         const originalStyles = document.body.style.cssText;
@@ -47,6 +33,12 @@ const LoginForm = ({ onLogin }) => {
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
+
+    const navigate = useNavigate();
+    
+        const handleRegisterClick = () => {
+            navigate('/Register');
+        };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -74,7 +66,52 @@ const LoginForm = ({ onLogin }) => {
         }
     };
 
-    const Container = styled.div`
+    return (
+        <Container>
+            <LeftImageContainer>
+                <img src="https://s1.1zoom.me/big0/147/Roads_Motion_Night_489310.jpg" alt="Carro" />
+            </LeftImageContainer>
+            <FormContainer>
+                <h2>Iniciar Sesión</h2>
+                <form onSubmit={handleSubmit}>
+                    <InputGroup>
+                        <label htmlFor='email'>Correo electrónico</label>
+                        <InputField
+                            type="email"
+                            id='email'
+                            value={email}
+                            onChange={handleEmailChange}
+                            required
+                            placeholder="Ingrese su correo electrónico"
+                        />
+                    </InputGroup>
+
+                    <InputGroup>
+                        <label htmlFor='pass'>Contraseña</label>
+                        <InputField
+                            id='pass'
+                            type="password"
+                            value={password}
+                            onChange={handlePasswordChange} 
+                            required
+                            placeholder="Ingrese su contraseña"
+                        />
+                    </InputGroup>
+
+                    <SubmitButton type="submit">Iniciar Sesión</SubmitButton>
+                    <LinkContainer>
+                    <LinkR onClick={handleRegisterClick}>Registrarse</LinkR>
+                    </LinkContainer>
+                </form>
+
+                {error && <ErrorMessage>{error}</ErrorMessage>}
+                {user && <WelcomeMessage>¡Bienvenido, {user.nombreCompleto}!</WelcomeMessage>}
+            </FormContainer>
+        </Container>
+    );
+};
+
+const Container = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
@@ -118,7 +155,7 @@ const LoginForm = ({ onLogin }) => {
         padding: 40px 30px;
         border-radius: 12px;
         font-family: 'Roboto', sans-serif;
-        height: 450px;
+        height: 500px;
         width: 100%;
         max-width: 550px;
         transition: transform 0.3s ease;
@@ -198,48 +235,21 @@ const LoginForm = ({ onLogin }) => {
         font-weight: bold;
     `;
 
-    return (
-        <Container>
-            <LeftImageContainer>
-                <img src="https://s1.1zoom.me/big0/147/Roads_Motion_Night_489310.jpg" alt="Carro" />
-            </LeftImageContainer>
-            <FormContainer>
-                <h2>Iniciar Sesión</h2>
-                <form onSubmit={handleSubmit}>
-                    <InputGroup>
-                        <label htmlFor='email'>Correo electrónico</label>
-                        <InputField
-                            ref={emailRef} 
-                            type="email"
-                            id='email'
-                            value={email}
-                            onChange={handleEmailChange}
-                            required
-                            placeholder="Ingrese su correo electrónico"
-                        />
-                    </InputGroup>
+    const LinkContainer = styled.div`
+        text-align: center; /* Centra el enlace horizontalmente */
+        margin-top: 20px; /* Espaciado arriba del enlace */
+    `;
 
-                    <InputGroup>
-                        <label htmlFor='pass'>Contraseña</label>
-                        <InputField
-                            ref={passwordRef}
-                            id='pass'
-                            type="password"
-                            value={password}
-                            onChange={handlePasswordChange} 
-                            required
-                            placeholder="Ingrese su contraseña"
-                        />
-                    </InputGroup>
-
-                    <SubmitButton type="submit">Iniciar Sesión</SubmitButton>
-                </form>
-
-                {error && <ErrorMessage>{error}</ErrorMessage>}
-                {user && <WelcomeMessage>¡Bienvenido, {user.nombreCompleto}!</WelcomeMessage>}
-            </FormContainer>
-        </Container>
-    );
-};
+    const LinkR = styled.a`
+        font-weight: bold;
+        font-size: 20px;
+	    align-self: center;
+	    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        text-decoration: underline;
+        &:hover {
+            cursor: pointer;
+            color: #1a73e8
+        }
+    `;
 
 export default LoginForm;
