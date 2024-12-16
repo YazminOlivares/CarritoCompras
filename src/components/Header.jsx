@@ -30,8 +30,12 @@ export const Header = ({
 	const [reload, setReload] = useState(false);
 	const [created, setCreated] = useState(false);
 	const options = [{
-		slug: "/Profile",
-		anchor: "Link 1",
+		slug: "./Profile",
+		anchor: "Perfil de Usuario",
+	  },
+	  {
+		slug: "./",
+		anchor: "Tienda",
 	  },];
 
 	const navigate = useNavigate();
@@ -81,7 +85,7 @@ export const Header = ({
 		setReload(!reload);
 	}
 
-	function Dropdown({ items = [], dropdownTitle }) {
+	function Dropdown({ items = [] }) {
 		const activatorRef = useRef(null);
 		const dropdownListRef = useRef(null);
 		const [isOpen, setIsOpen] = useState(false);
@@ -137,13 +141,13 @@ export const Header = ({
 			  onClick={clickHandler}
 			  ref={activatorRef}
 			>
-			  {dropdownTitle}{" "}
+			  <img src="https://i.pinimg.com/564x/9d/6b/9d/9d6b9db2dcb0526a09b89fb35d075c72.jpg" alt="Foto de perfil" />
 			  {isOpen ? (
 				<svg
-				  height="24"
-				  fill="rgb(70,70,70)"
+				  height="40"
+				  fill="rgb(245,245,245)"
 				  viewBox="0 0 24 24"
-				  width="24"
+				  width="45"
 				  xmlns="http://www.w3.org/2000/svg"
 				>
 				  <path d="m0 0h24v24h-24z" fill="none" />
@@ -151,10 +155,10 @@ export const Header = ({
 				</svg>
 			  ) : (
 				<svg
-				  height="24"
-				  fill="rgb(70,70,70)"
+				  height="40"
+				  fill="rgb(245,245,245)"
 				  viewBox="0 0 24 24"
-				  width="24"
+				  width="45"
 				  xmlns="http://www.w3.org/2000/svg"
 				>
 				  <path d="m0 0h24v24h-24z" fill="none" />
@@ -170,7 +174,7 @@ export const Header = ({
 			>
 			  {items.map((item, index) => (
 				<li className={item_list} key={index}>
-				  <a href={item.slug}>{item.anchor}</a>
+				  <Link to={item.slug}>{item.anchor}</Link>
 				</li>
 			  ))}
 			</ul>
@@ -241,10 +245,9 @@ export const Header = ({
         	)}
             <h1>
 				<Link to="/productlist" style={{ textDecoration: 'none', color: 'inherit' }}>
-				Tienda en Línea
+					Tienda en Línea
 				</Link>
 			</h1>
-			<Dropdown dropdownTitle="Dropdown" items={options}/>
 			<div className="contenedorRight">
 				<div className="container-icon">
 					<div className="container-cart-icon" onClick={() => setActive(!active)}>
@@ -321,12 +324,8 @@ export const Header = ({
 						)}
 						
 					</div>
-					</div>
-					{userId && (
-						<div className="user-profile" onClick={handleProfileClick}>
-							<span>Edgar Villela</span>
-						</div>
-						)}
+				</div>
+				<Dropdown items={options}/>
 				<div/>
 			</div>
         </header>

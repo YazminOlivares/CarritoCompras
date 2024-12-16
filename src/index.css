@@ -33,7 +33,7 @@ h1 a{
 }
 
 h1:hover {
-	color: #333333;
+	color: #F5F5F5;
 	transform: scale(1.05);
 }
 
@@ -53,7 +53,7 @@ p, span, .product-description {
 .icon-cart {
 	width: 50px;
 	height: 50px;
-	stroke: #333333;
+	stroke: #CECECE;
 }
 
 .icon-cart:hover {
@@ -96,8 +96,8 @@ header {
 	position: absolute;
 	top: 55%;
 	right: 0;
-	background-color: #001F3F;
-	color: #FFFFFF;
+	background-color: #bdb8b8;
+	color: #001F3F;
 	width: 30px;
 	height: 30px;
 	display: flex;
@@ -109,6 +109,7 @@ header {
 
 #contador-productos {
 	font-size: 15px;
+	font-weight: bold;
 }
 
 .container-cart-products {
