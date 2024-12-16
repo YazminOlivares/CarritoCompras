@@ -325,15 +325,9 @@ export const Header = ({
 						
 					</div>
 					</div>
-					{userId && (
-						<div className="user-profile" onClick={handleProfileClick}>
-							<span>Perfil</span>
-						</div>
-						)}
 				</div>
 				<Dropdown items={options}/>
 				<div/>
-			</div>
         </header>
     )
 }
