@@ -215,7 +215,7 @@ export const Header = ({
 					</div>
 					{userId && (
 						<div className="user-profile" onClick={handleProfileClick}>
-							<span>Nombre usuario</span>
+							<span>Edgar Villela</span>
 						</div>
 						)}
 				<div/>

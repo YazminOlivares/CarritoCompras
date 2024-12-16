@@ -88,6 +88,24 @@ const Profile = ({ user }) => {
             font-size: 1.2rem;
             color: #333333;
         }
+
+        a {
+            text-decoration: none; /* Elimina el subrayado predeterminado */
+            color: #333; /* Color base para los enlaces */
+            font-weight: 500; /* Para darle un poco de énfasis al enlace */
+            transition: color 0.3s ease, border-bottom 0.3s ease; /* Transición suave en color y subrayado */
+        }
+
+        a:hover {
+            color: #001F3F;
+            border-bottom: 2px solid #001F3F;
+        }
+
+        a:focus {
+            outline: none;
+            border-bottom: 2px solid black;
+        }
+
     `;
 
     const Avatar = styled.img`
@@ -117,16 +135,25 @@ const Profile = ({ user }) => {
         <Container>
             <LeftContainer>
                 <Avatar src="https://i.pinimg.com/564x/9d/6b/9d/9d6b9db2dcb0526a09b89fb35d075c72.jpg"/>
-                <h3>Nombre de usuario</h3>
-                <p>Estado: {user.active ? 'Activo' : 'Inactivo'}</p>
+                <h3>Bienvenido Edgar!</h3>
+                <p>Esta es la mejor tienda en linea de autos que puedas encontrar.</p>
             </LeftContainer>
             <RightContainer>
-                <h2>Datos Generales</h2>
                 <ProfileDetail>
-                    <p><span>Email:</span>{user.email}</p>
-                    <p><span>Nombre Completo:</span> Poner nombre completo</p>
-                    <p><span>Fecha de Registro:</span> Poner o inventar algo</p>
-                    <p><span>Estado:</span> {user.active ? 'Activo' : 'Inactivo'}</p>
+                    <h2>Datos Generales</h2>
+                    <hr></hr>
+                    <p><span>Email:</span>edjovillelaca@ittepic.edu.mx</p>
+                    <p><span>Nombre Completo:</span>Edgar Joel Villela Castañeda</p>
+                    <p><span>Fecha de Registro:</span>2024-12-15</p>
+                    <p><span>RFC:</span>VICE0008251P8</p>
+                    <p><span>Dirección:</span>Boulevard Central 123</p>
+                    <p><span>Código postal:</span>63197</p>
+                    <h2>Datos De Contacto</h2>
+                    <hr></hr>
+                    <p><span>Telefono Celular:</span>+52 311 202 1604</p>
+                    <p><span>Facebook:</span><a href="https://www.facebook.com">www.facebook.com</a></p>
+                    <p><span>Instagram:</span><a href="https://www.instagram.com">www.instagram.com</a></p>
+                    <p><span>TikTok:</span><a href="https://www.tiktok.com">www.tiktok.com</a></p>
                 </ProfileDetail>
             </RightContainer>
         </Container>
