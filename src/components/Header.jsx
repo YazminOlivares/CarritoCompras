@@ -77,12 +77,21 @@ export const Header = ({
 
 	const paymentBtn = async () => {
 		console.log(infoCart);
-		await payShCart(infoCart._id);
-		setNotification2('Pago realizado con exito')
-		setTimeout(() => {
-			setNotification2('');
-		}, 3000);
-		setReload(!reload);
+		try {
+			await payShCart(infoCart._id);
+			setNotification2('Pago realizado con exito')
+			setCountProducts(0);
+			setAllProducts([]); 
+			setTotal(0);
+			setInfoCart([]);
+			setTimeout(() => {
+				setNotification2('');
+			}, 3000);
+			setReload(false);
+
+		} catch (error) {
+			console.error('Error al procesar el pago:', error);
+		}
 	}
 
 	function Dropdown({ items = [] }) {
@@ -93,8 +102,6 @@ export const Header = ({
 		const clickHandler = () => {
 		  setIsOpen(!isOpen);
 		};
-	  
-		
 	  
 		const clickOutsideHandler = (event) => {
 		  // Cerrar el dropdown si se hace clic fuera de él
@@ -210,8 +217,8 @@ export const Header = ({
 				setCountProducts(cont);
 				setAllProducts(productsArray); 
 				setTotal(to);
+				setReload(true);
 			}else if(!created){
-				
 				const idCart = await createNewShCart(userId);
 				console.log("creo nuevo: ",idCart.createShoppingCar._id);
 				setCountProducts(0);
