@@ -325,9 +325,8 @@ export const Header = ({
 						
 					</div>
 					</div>
-				</div>
 				<Dropdown items={options}/>
-				<div/>
+				</div>
         </header>
     )
 }
