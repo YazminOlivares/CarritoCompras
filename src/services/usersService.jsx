@@ -99,12 +99,12 @@ export async function shoppingCartNo(userId) {
                     shoppingCartNo(userId: $userId) {
                         _id
                         productos {
-                        quantity
-                        product {
-                            _id
-                            name
-                            price
-                        }
+                            quantity
+                            product {
+                                _id
+                                name
+                                price
+                            }
                         }
                         total
                         sDate
