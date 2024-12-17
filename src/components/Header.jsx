@@ -36,12 +36,20 @@ export const Header = ({
 	  {
 		slug: "./",
 		anchor: "Tienda",
-	  },];
+	  },
+	  {
+		slug: "./Historial",
+		anchor: "Historial",
+	  }];
 
 	const navigate = useNavigate();
 
 	const handleProfileClick = () => {
 		navigate('/Profile');
+	};
+
+	const handleHistorialClick = () => {
+		navigate('/Historial');
 	};
 	
     const onDeleteProduct = async (product) => {

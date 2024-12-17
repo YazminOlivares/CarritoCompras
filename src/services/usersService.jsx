@@ -86,6 +86,53 @@ export async function getUserById(userId) {
     }
 }
 
+export async function AllUserCarts(userId) {
+    try {
+        const resp = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                query: `
+                    query AllUserCarts($allUserCartsUserId: ID!) {
+                        allUserCarts(userId: $allUserCartsUserId) {
+                            _id
+                            total
+                            status
+                            productos {
+                                quantity
+                                product {
+                                    _id
+                                    name
+                                    price
+                                    desc
+                                }
+                            }
+                        }
+                    }
+                `,
+                variables: {
+                    "userId": userId
+                }
+            })
+        });
+
+        const result = await resp.json();
+
+        // Manejar errores si la consulta falla
+        if (result.errors) {
+            console.error("Errores en la consulta GraphQL:", result.errors);
+            throw new Error("Error al obtener el usuario");
+        }
+
+        return result.data.user;
+    } catch (e) {
+        console.log("Error al obtener el usuario:", e);
+        return e;
+    }
+}
+
 export async function registerUser(userData) {
     try {
         const response = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
@@ -127,3 +174,4 @@ export async function registerUser(userData) {
         throw error;
     }
 }
+
