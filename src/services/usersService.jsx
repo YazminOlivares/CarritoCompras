@@ -86,7 +86,7 @@ export async function getUserById(userId) {
     }
 }
 
-export async function AllUserCarts(userId) {
+export async function shoppingCartNo(userId) {
     try {
         const resp = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
             method: 'POST',
@@ -95,21 +95,21 @@ export async function AllUserCarts(userId) {
             },
             body: JSON.stringify({
                 query: `
-                    query AllUserCarts($allUserCartsUserId: ID!) {
-                        allUserCarts(userId: $allUserCartsUserId) {
+                    query ShoppingCartNo($userId: ID!) {
+                    shoppingCartNo(userId: $userId) {
+                        _id
+                        productos {
+                        quantity
+                        product {
                             _id
-                            total
-                            status
-                            productos {
-                                quantity
-                                product {
-                                    _id
-                                    name
-                                    price
-                                    desc
-                                }
-                            }
+                            name
+                            price
                         }
+                        }
+                        total
+                        sDate
+                        cDate
+                    }
                     }
                 `,
                 variables: {
@@ -126,7 +126,7 @@ export async function AllUserCarts(userId) {
             throw new Error("Error al obtener el usuario");
         }
 
-        return result.data.user;
+        return result.data.shoppingCartNo;
     } catch (e) {
         console.log("Error al obtener el usuario:", e);
         return e;

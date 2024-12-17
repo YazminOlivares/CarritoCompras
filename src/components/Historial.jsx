@@ -2,22 +2,43 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-//import { AllUserCarts } from '../services/usersService';
+import { shoppingCartNo } from '../services/usersService';
 
 const Historial = ({ user }) => {
 
-    console.log('Pero si entra? ', user);
+    console.log('Pero si entra? ', user._id);
 
     const [carritos, setCarritos] = useState([]); 
     const [loading, setLoading] = useState(true); 
     const [notification, setNotification] = useState('');
 
-    /* useEffect(() => {
+    useEffect(() => {
         const fetchProducts = async () => {
             try {
-            const carritos = await AllUserCarts(user);
-            console.log('Listado de carritos: ',carritos);
-            setCarritos(carritos); 
+            const carritoss = await shoppingCartNo(user._id);
+            console.log('Listado de carritoss: ', carritoss);
+            console.log('espacio');
+            console.log('espacio');
+            console.log('espacio');
+            console.log('espacio');
+            setCarritos(carritoss); 
+
+            let todosCarritos = [];
+            carritoss.map(carrito => {
+                console.log(carrito);
+                console.log(new Date(parseInt(carrito.cDate)).toLocaleString());
+                todosCarritos.push(
+                    {
+                        id: carrito._id,
+                        name: producto.product.name,
+                        price: producto.product.price,
+                        images: [producto.product.images],
+                        quantity: producto.quantity,
+                        facturapi: producto.product.facturapi
+                    }
+                )
+            });
+
             } catch (error) {
             console.error("Error al obtener los carritos:", error);
             } finally {
@@ -26,7 +47,7 @@ const Historial = ({ user }) => {
         };
     
         fetchProducts();
-    }, [user]); */
+    }, []);
 
     const Container = styled.div`
         display: flex;
@@ -42,7 +63,6 @@ const Historial = ({ user }) => {
 
     return (
         <Container>
-            <p>No jala esta madre</p>
         </Container>
     );
 };

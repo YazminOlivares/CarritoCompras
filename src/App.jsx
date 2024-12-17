@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { ProductsList } from './components/ProductsList';
 import Login from './components/LoginForm';
 import Profile from './components/Profile';
+import Historial from './components/Historial';
 import Register from './components/RegisterForm';
 
 function App() {
@@ -49,6 +50,8 @@ function App() {
         )} />
 
         <Route path="/profile" element={user ? <Profile user={user} /> : <Navigate to="/" />} />
+
+        <Route path="/Historial" element={user ? <Historial user={user} /> : <Navigate to="/" />} />
 
         <Route path='/Register' element={<Register />} />
 
