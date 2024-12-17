@@ -96,8 +96,7 @@ const Historial = ({ user }) => {
                                         <PDetalles><b>{detalles.desc}</b></PDetalles>
                                     </Info>
                                     <Info>
-                                        <p>Cantidad</p>
-                                        <PDetalles><b>{producto.quantity}</b></PDetalles>
+                                        <PDetalles>Cantidad: <b>{producto.quantity}</b></PDetalles>
                                     </Info>
                                 </CarritoDetalles>
                             </CarritoContenido>
