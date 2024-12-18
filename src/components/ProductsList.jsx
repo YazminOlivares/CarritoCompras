@@ -99,9 +99,9 @@ export const ProductsList = ({
 
     function CualCarro(carrito){
       if(carrito.carrito === "nara"){
-        return <img src="https://img.freepik.com/vector-gratis/coche-sedan-blanco-vector-fondo-negro_53876-67369.jpg" alt={carrito.name} />
+        return <img src="https://img.freepik.com/vector-gratis/coche-sedan-blanco-vector-fondo-negro_53876-67369.jpg" alt={carrito.name} className="fotoCarro"/>
       }else{
-        return <img src={carrito.carrito} alt={carrito.name} />
+        return <img src={carrito.carrito} alt={carrito.name} className="fotoCarro"/>
       }
     }
 

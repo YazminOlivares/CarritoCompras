@@ -222,7 +222,7 @@ header {
 	transform: translateY(-5px);
 }
 
-.item img {
+.fotoCarro {
 	width: 100%;
 	height: 200px;
 	object-fit: cover;
@@ -235,7 +235,7 @@ header {
 	overflow: hidden;
 }
 
-.item:hover img {
+.fotoCarro:hover{
 	transform: scale(1.1);
 }
 
