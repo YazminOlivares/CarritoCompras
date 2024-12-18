@@ -42,20 +42,20 @@ const Profile = ({ user }) => {
                 <RightContainer>
                     <h2>Datos Generales</h2>
                     <hr></hr>
-                    <p><span>Email:</span>{user.email}</p>
-                    <p><span>Nombre Completo:</span>{user.nombreCompleto}</p>
-                    <p><span>Fecha de Registro:</span>{fecha}</p>
-                    <p><span>RFC:</span>{user.RFC}</p>
-                    <p><span>Dirección:</span>{user.direccion}</p>
-                    <p><span>Código postal:</span>{user.zipCode}</p>
+                    <p><span>Nombre Completo: </span>{user.nombreCompleto}</p>
+                    <p><span>Fecha de Registro: </span>{fecha}</p>
+                    <p><span>RFC: </span>{user.RFC}</p>
+                    <p><span>Dirección: </span>{user.direccion}</p>
+                    <p><span>Código postal: </span>{user.zipCode}</p>
                 </RightContainer>
 
                 <RightContainer>
                     <h2>Datos de Contacto</h2>
                     <hr></hr>
-                    <p><span>Teléfono:</span>{user.telefono}</p>
-                    <p><span>Facebook:</span><a href="https://www.facebook.com">www.facebook.com</a></p>
-                    <p><span>Instagram:</span><a href="https://www.instagram.com">www.instagram.com</a></p>
+                    <p><span>Teléfono: </span>{user.telefono}</p>
+                    <p><span>Email: </span>{user.email}</p>
+                    <p><span>Facebook: </span><a href="https://www.facebook.com">www.facebook.com</a></p>
+                    <p><span>Instagram: </span><a href="https://www.instagram.com">www.instagram.com</a></p>
                 </RightContainer>
             </RightWrapper>
         </Container>
