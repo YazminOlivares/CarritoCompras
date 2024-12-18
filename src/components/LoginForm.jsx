@@ -218,7 +218,7 @@ const Container = styled.div`
         font-weight: bold;
         cursor: pointer;
         transition: opacity 0.3s ease;
-        margin-top: 1.5rem;
+        margin-top: 1.1rem;
 
         &:hover {
             opacity: 0.9;
@@ -248,6 +248,7 @@ const Container = styled.div`
     const LinkR = styled.a`
         font-weight: bold;
         font-size: 20px;
+        padding-bottom: 2rem;
 	    align-self: center;
 	    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         text-decoration: underline;
