@@ -124,16 +124,8 @@ const RightContainer = styled.div`
         margin-bottom: 20px;
     }
 
-    p {
-        font-size: 1.2rem;
-        color: #333333;
-        margin: 5px 0;
-        margin-bottom: 10px;
-
-        span {
-            font-weight: bold;
-            color: #001F3F;
-        }
+    hr {
+        margin-bottom: 15px;
     }
     
     p {
@@ -142,6 +134,12 @@ const RightContainer = styled.div`
             align-items: center;
             font-size: 1.2rem;
             color: #333333;
+            margin-bottom: 10px;
+        }
+
+        span {
+            font-weight: bold;
+            color: #001F3F;
         }
 
         a {
