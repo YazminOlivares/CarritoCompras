@@ -231,9 +231,8 @@ const Carganding = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem 3rem 3rem 3rem;
     gap: 30px;
-    height: 100vh;
+    height: 92vh;
     font-family: 'Roboto', sans-serif;
     flex-direction: column;
 `;
