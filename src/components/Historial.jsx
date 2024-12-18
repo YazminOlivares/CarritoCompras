@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { shoppingCartNo } from '../services/usersService';
 import { searchProductId } from '../services/productsService';
+import 'ldrs/trefoil'
 
 const Historial = ({ user }) => {
     const [carritos, setCarritos] = useState([]); 
@@ -43,7 +44,15 @@ const Historial = ({ user }) => {
     }, [user]);
 
     if (loading) {
-        return <div>Carganding los datuskis</div>;
+        return (<Carganding>
+                <l-trefoil
+                size="150"
+                stroke="10"
+                stroke-length="0.08"
+                bg-opacity="0.1"
+                speed="0.9"
+                color="#D1D1D1"/>
+                </Carganding>);
     }
 
     console.log("Producto detalles: ", productoDetalles);
@@ -73,32 +82,24 @@ const Historial = ({ user }) => {
                         </CarritoDerecha>
                     </Cabecera>
 
+                    <SemiCabecera>
+                        <p>Producto</p>
+                        <p>Marca</p>
+                        <p>Nombre</p>
+                        <p>Descripción</p>
+                        <p>Cantidad</p>
+                    </SemiCabecera>
+
                     {carrito.productos.map((producto, index) => {
-                        const detalles = productoDetalles[producto.product._id] || {};
+                        const detalles = productoDetalles[producto.product._id];
 
                         return (
                             <CarritoContenido key={index}>
-                                <Info>
-                                    <p>Producto</p>
-                                    <FotoTalVez src={detalles.images[0]} alt="Producto" />
-                                </Info>
-                                <Info>
-                                    <p>Marca</p>
-                                    <Logo src={detalles.brand.logo} alt="Logo de la marca"/>
-                                </Info>
-                                <CarritoDetalles>
-                                    <Info>
-                                        <p>Nombre</p>
-                                        <PDetalles><b>{producto.product.name}</b></PDetalles>
-                                    </Info>
-                                    <Info>
-                                        <p>Descripción</p>
-                                        <PDetalles><b>{detalles.desc}</b></PDetalles>
-                                    </Info>
-                                    <Info>
-                                        <PDetalles>Cantidad: <b>{producto.quantity}</b></PDetalles>
-                                    </Info>
-                                </CarritoDetalles>
+                                <FotoTalVez src={detalles.images[0]} alt="Producto" />
+                                <Logo src={detalles.brand.logo} alt="Logo de la marca"/>
+                                <PDetalles><b>{producto.product.name}</b></PDetalles>
+                                <PDetalles><b>{detalles.desc}</b></PDetalles>
+                                <PDetalles>Cantidad: <b>{producto.quantity}</b></PDetalles>
                             </CarritoContenido>
                         );
                     })}
@@ -129,19 +130,37 @@ const Carrito = styled.div`
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 1.5rem;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    filter: brightness(0.95);
 `;
 
 const Cabecera = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 12px;
-    margin-bottom: 12px;
+    border-bottom: 1px solid silver;
+    padding: 1.2rem 1.2rem 1.2rem 1.2rem;
     line-height: 1.5;
+    background-color: gainsboro;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+`;
+
+const SemiCabecera = styled.div`
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 2fr 2fr 2fr;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid #000;
+    background-color: ghostwhite;
+    border-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000,
+        transparent 100%
+      ) 30;
 `;
 
 const CarritoInfo = styled.div`
@@ -177,46 +196,44 @@ const PDerecha = styled.p`
 `;
 
 const CarritoContenido = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 2fr 2fr 2fr;
+    align-items: center;
+    text-align: center;
     padding: 1rem 0;
-    border-bottom: 2px solid #DDD;
-    gap: 1.5rem; 
-    width: 100%; 
+    border-bottom: 1px solid #ddd;
+    gap: 1rem;
+    &:last-child {
+        border-bottom: none;
+    }
 `;
 
 const FotoTalVez = styled.img`
-    width: 8rem;
+    width: 9rem;
     height: 5.5rem;
-    margin-right: 16px;
     object-fit: cover;
+    margin: 0 auto;
 `;
 
 const Logo = styled.img`
-    width: 2.5rem;
+    width: 3rem;
     height: auto;
-    margin-bottom: 0.5rem;
-`;
-
-const CarritoDetalles = styled.div`
-    font-size: 14px;
-    color: #333;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+    margin: 0 auto;
 `;
 
 const PDetalles = styled.p`
-    font-size: 14px;
-    margin: 0 0 12px;
+    margin: 0;
+    font-size: 1rem;
     color: #333;
 `;
 
-const Info = styled.div`
+const Carganding = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    flex: 1;
-    min-width: 120px;
+    padding: 2rem 3rem 3rem 3rem;
+    gap: 30px;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    flex-direction: column;
 `;
