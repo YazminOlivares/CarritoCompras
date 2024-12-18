@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { shoppingCartNo } from '../services/usersService';
 import { searchProductId } from '../services/productsService';
-import 'ldrs/trefoil'
+import { trefoil } from 'ldrs'
 
 const Historial = ({ user }) => {
     const [carritos, setCarritos] = useState([]); 
@@ -12,6 +12,7 @@ const Historial = ({ user }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        trefoil.register()
         const originalStyles = document.body.style.cssText;
 
         document.body.style.cssText = `
@@ -71,7 +72,8 @@ const Historial = ({ user }) => {
                 stroke-length="0.08"
                 bg-opacity="0.1"
                 speed="0.9"
-                color="#D1D1D1"/>
+                color="#D1D1D1" 
+                ></l-trefoil>
                 </Carganding>);
     }
 
