@@ -196,7 +196,7 @@ const Container = styled.div`
         padding: 12px 15px;
         font-size: 1rem;
         border: 1px solid #dcdcdc;
-        border-radius: 8px;
+        border-radius: 30px;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
         &:focus {
