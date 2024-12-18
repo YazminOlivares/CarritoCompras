@@ -12,6 +12,26 @@ const Historial = ({ user }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const originalStyles = document.body.style.cssText;
+
+        document.body.style.cssText = `
+            background: linear-gradient(145deg, 
+            #3B5066 0%, 
+            #26496C 4.35%,
+            rgba(0,31,63,1) 10%, 
+            rgba(149,109,73,1) 25%, 
+            rgba(27,69,111,1) 50%, 
+            rgba(255,181,181,1) 75%, 
+            #2E4E75 95.6%, 
+            #576381 100%);
+        `;
+        
+        return () => {
+            document.body.style.cssText = originalStyles;
+        };
+    }, []);
+
+    useEffect(() => {
         const fetchCarritos = async () => {
             try {
                 const carritoss = await shoppingCartNo(user._id);
