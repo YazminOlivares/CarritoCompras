@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'; // Agregamos Navigate para redirigir
 import { Header } from './components/Header';
 import { ProductsList } from './components/ProductsList';
@@ -14,8 +14,21 @@ function App() {
   const [countProducts, setCountProducts] = useState(0);
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+        setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   const handleLogin = (loggedInUser) => {
-    setUser(loggedInUser);
+      setUser(loggedInUser);
+  };
+
+  const handleLogout = () => {
+      localStorage.removeItem('user'); 
+      setUser(null);
   };
 
   return (
@@ -31,6 +44,7 @@ function App() {
           countProducts={countProducts}
           setCountProducts={setCountProducts}
           userId={user._id}
+          handleLogout = {handleLogout}
         />
       )}
       <Routes>

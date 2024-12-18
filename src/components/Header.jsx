@@ -20,7 +20,8 @@ export const Header = ({
     setTotal,
     countProducts,
     setCountProducts,
-	userId
+	userId,
+	handleLogout
 }) => {
 
     const [active, setActive] = useState(false);
@@ -40,6 +41,10 @@ export const Header = ({
 	  {
 		slug: "./Historial",
 		anchor: "Historial",
+	  },
+	  {
+		slug: "./",
+		anchor: "Salir",
 	  }];
 
 	const navigate = useNavigate();
@@ -50,6 +55,10 @@ export const Header = ({
 
 	const handleHistorialClick = () => {
 		navigate('/Historial');
+	};
+
+	const handleSalirClick = () => {
+		const salir = handleLogout();
 	};
 	
     const onDeleteProduct = async (product) => {
@@ -112,7 +121,7 @@ export const Header = ({
 		};
 	  
 		const clickOutsideHandler = (event) => {
-		  // Cerrar el dropdown si se hace clic fuera de él
+		  
 		  if (
 			dropdownListRef.current &&
 			!dropdownListRef.current.contains(event.target) &&
@@ -130,7 +139,6 @@ export const Header = ({
 			}
 			};
 
-		  // Agregar o eliminar eventos según el estado del dropdown
 		  if (isOpen) {
 			document.addEventListener("mousedown", clickOutsideHandler);
 			document.addEventListener("keyup", keyHandler);
@@ -139,7 +147,6 @@ export const Header = ({
 			document.removeEventListener("keyup", keyHandler);
 		  }
 	  
-		  // Limpieza
 		  return () => {
 			document.removeEventListener("mousedown", clickOutsideHandler);
 			document.removeEventListener("keyup", keyHandler);
@@ -148,7 +155,6 @@ export const Header = ({
 	  
 		return (
 		  <div className={dropdown_wrapper}>
-			{/* Botón activador del dropdown */}
 			<button
 			  className={dropdown_activator}
 			  aria-haspopup="true"
@@ -182,16 +188,22 @@ export const Header = ({
 			  )}
 			</button>
 	  
-			{/* Lista del dropdown */}
+
 			<ul
 			  ref={dropdownListRef}
 			  className={`${dropdown_item_list} ${isOpen ? activeClass : ""}`}
 			>
-			  {items.map((item, index) => (
-				<li className={item_list} key={index}>
-				  <Link to={item.slug}>{item.anchor}</Link>
-				</li>
-			  ))}
+			  {items.map((item, index) => 
+				item.anchor === "Salir" ? (
+					<li className={item_list} key={index} onClick={handleSalirClick}>
+						<Link to={item.slug}>{item.anchor}</Link>
+					</li>
+				): (
+					<li className={item_list} key={index}>
+						<Link to={item.slug}>{item.anchor}</Link>
+					</li>
+				)
+			  )}
 			</ul>
 		  </div>
 		);
