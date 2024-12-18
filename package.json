@@ -11,6 +11,7 @@
     "start": "vite"
   },
   "dependencies": {
+    "@webcomponents/webcomponentsjs": "^2.8.0",
     "graphql": "^16.9.0",
     "ldrs": "^1.0.2",
     "react": "^18.3.1",
