@@ -63,16 +63,16 @@ const Profile = ({ user }) => {
 };
 
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background: linear-gradient(135deg, #001F3F 0%, #F5F5F5 100%);
-    padding: 40px;
-    gap: 30px;
-    margin-top: 70px;
-    height: 100vh;
-    font-family: 'Roboto', sans-serif;
-`;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: linear-gradient(145deg, rgba(0,31,63,1) 0%, rgba(149,109,73,1) 33%, rgba(27,69,111,1) 66%, rgba(255,181,181,1) 100%);
+        padding: 40px;
+        gap: 30px;
+        margin-top: 70px;
+        height: 100vh;
+        font-family: 'Roboto', sans-serif;
+    `;
 
 const LeftContainer = styled.div`
     width: 670px;
@@ -135,6 +135,31 @@ const RightContainer = styled.div`
             color: #001F3F;
         }
     }
+    
+    p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #333333;
+        }
+
+        a {
+            text-decoration: none; /* Elimina el subrayado predeterminado */
+            color: #333; /* Color base para los enlaces */
+            font-weight: 500; /* Para darle un poco de énfasis al enlace */
+            transition: color 0.3s ease, border-bottom 0.3s ease; /* Transición suave en color y subrayado */
+        }
+
+        a:hover {
+            color: #001F3F;
+            border-bottom: 2px solid #001F3F;
+        }
+
+        a:focus {
+            outline: none;
+            border-bottom: 2px solid black;
+        }
 `;
 
 const Avatar = styled.img`

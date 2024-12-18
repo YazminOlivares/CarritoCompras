@@ -109,3 +109,44 @@ export async function addOneProduct(cartId, input) {
     }
 
 }
+
+
+export async function searchProductId(prodId) {
+    try {
+        const resp = await fetch('https://proyecto-unidad-2-servicios-web-1.onrender.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ query: 
+            `query Query($prodId: ID!) {
+                searchProductId(prodId: $prodId) {
+                    _id
+                    desc
+                    price
+                    category
+                    brand {
+                      _id
+                      name
+                      CountryOrigin
+                      logo
+                    }
+                    quantity
+                    cDate
+                    images
+                    facturapi
+                  }
+                }
+            `,
+            variables: {
+                "prodId": prodId
+            } 
+        })
+    });
+        const result = await resp.json();
+        return result.data;
+    }catch(e) {
+        console.log("Error al obtener producto.", e);
+        return e;
+    }
+}

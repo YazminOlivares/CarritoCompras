@@ -2,6 +2,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { addOneProduct, getProducts } from "../services/productsService";
+import styled from 'styled-components';
+import 'ldrs/trefoil'
 
 export const ProductsList = ({
     allProducts,
@@ -18,6 +20,15 @@ export const ProductsList = ({
     const [loading, setLoading] = useState(true); 
     const [notification, setNotification] = useState('');
 
+    const Carganding = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    height: 92vh;
+    font-family: 'Roboto', sans-serif;
+    flex-direction: column;
+    `;
     
     useEffect(() => {
         const fetchProducts = async () => {
@@ -34,6 +45,18 @@ export const ProductsList = ({
     
         fetchProducts();
     }, []);
+
+    if (loading) {
+      return (<Carganding>
+              <l-trefoil
+              size="150"
+              stroke="10"
+              stroke-length="0.08"
+              bg-opacity="0.1"
+              speed="0.9"
+              color="#D1D1D1"/>
+              </Carganding>);
+    }
 
     const onAddProduct = async (product) => {
 

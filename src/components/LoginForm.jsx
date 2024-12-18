@@ -59,6 +59,8 @@ const LoginForm = ({ onLogin }) => {
                 return;
             }
 
+            localStorage.setItem('user', JSON.stringify(foundUser));
+
             onLogin(foundUser);
             
             setError('');
@@ -190,10 +192,11 @@ const Container = styled.div`
 
     const InputField = styled.input`
         width: 100%;
+        height: 58px;
         padding: 12px 15px;
         font-size: 1rem;
         border: 1px solid #dcdcdc;
-        border-radius: 8px;
+        border-radius: 30px;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
         &:focus {
@@ -209,7 +212,7 @@ const Container = styled.div`
         background: #001F3F;
         color: white;
         border: none;
-        border-radius: 8px;
+        border-radius: 30px;
         font-family: 'Montserrat', sans-serif;
         font-size: 1.2rem;
         font-weight: bold;
