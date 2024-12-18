@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { registerUser } from '../services/usersService';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
@@ -12,7 +12,15 @@ const LoginForm = () => {
     const [Address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [payment, setPayment] = useState("");
-    const [error, setError] = useState('');
+    const [notification, setNotification] = useState({ message: "", visible: false });
+
+    const showNotification = (message) => {
+        setNotification({ message, visible: true });
+
+        setTimeout(() => {
+            setNotification({ message: "", visible: false });
+        }, 3000);
+    };
 
     useEffect(() => {
         const originalStyles = document.body.style.cssText;
@@ -49,11 +57,11 @@ const LoginForm = () => {
 
     const handleZcodeChange = (e) => {
         const value = e.target.value;
-        const parsedValue = parseInt(value, 10); // Convierte el valor a un entero
+        const parsedValue = parseInt(value, 10);
         if (!isNaN(parsedValue)) {
-            setZcode(parsedValue); // Solo guarda el valor si es un número
+            setZcode(parsedValue);
         } else {
-            setZcode(""); // Si no es un número, no actualiza el estado
+            setZcode("");
         }
     };
 
@@ -92,14 +100,15 @@ const LoginForm = () => {
         };
         
         try {
-            const user = await registerUser(userData);
-            setError('');
-            console.log("Registrado correctamente");
-            navigate('/');
+            await registerUser(userData);
+            showNotification("Usuario creado correctamente 🎉");
+            // Retrasar el navigate
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
         } catch (err) {
-            console.log("errorererere: " + err.ErrorMessage)
-            console.log("nombre: "+name)
-            setError("Error al resgistrarse");
+            console.error("Error al registrar usuario: ", err);
+            showNotification("Error al crear el usuario");
         }
     };
 
@@ -209,9 +218,12 @@ const LoginForm = () => {
                     <LinkR onClick={handleLoginClick}>Iniciar Sesión</LinkR>
                     </LinkContainer>
                 </form>
-
-                {error && <ErrorMessage>{error}</ErrorMessage>}
             </FormContainer>
+            {notification.visible && (
+                <Notification>
+                    {notification.message}
+                </Notification>
+            )}
         </Container>
     );
 };
@@ -343,21 +355,6 @@ const Container = styled.div`
         }
     `;
 
-    const ErrorMessage = styled.p`
-        color: #dc3545;
-        font-size: 14px;
-        text-align: center;
-        margin-top: 15px;
-    `;
-
-    const WelcomeMessage = styled.p`
-        color: #28a745;
-        font-size: 16px;
-        text-align: center;
-        margin-top: 15px;
-        font-weight: bold;
-    `;
-
     const LinkContainer = styled.div`
         text-align: center; /* Centra el enlace horizontalmente */
         margin-top: 20px; /* Espaciado arriba del enlace */
@@ -393,6 +390,31 @@ const Container = styled.div`
         display: flex;
         flex-direction: column; /* Coloca el label encima del input */
         flex: 1; /* Hace que todos los grupos tengan el mismo espacio */
+    `;
+
+    const fadeIn = keyframes`
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    `;
+
+    const Notification = styled.div`
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #001F3F;
+        color: #fff;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        font-size: 1rem;
+        z-index: 1000;
+        animation: ${fadeIn} 0.5s ease-in-out;
     `;
 
 export default LoginForm;
