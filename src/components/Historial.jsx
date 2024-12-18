@@ -12,6 +12,28 @@ const Historial = ({ user }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+            const originalStyles = document.body.style.cssText;
+    
+            document.body.style.cssText = `
+                max-width: 100%;
+                margin-top: 75px;
+                background: linear-gradient(145deg,
+                #3B5066 0%, 
+                #26496C 10%, 
+                rgba(0, 31, 63, 1) 25%, 
+                rgba(50, 82, 112, 1) 50%, 
+                rgba(70, 90, 120, 1) 75%, 
+                #2E4E75 90%, 
+                #576381 100%);
+
+            `;
+            
+            return () => {
+                document.body.style.cssText = originalStyles;
+            };
+        }, []);
+
+    useEffect(() => {
         const fetchCarritos = async () => {
             try {
                 const carritoss = await shoppingCartNo(user._id);
@@ -121,7 +143,7 @@ const Container = styled.div`
     align-items: flex-start;
     padding: 2rem 3rem 3rem 3rem;
     gap: 30px;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Roboto', sans-serif;
     flex-direction: column;
 `;
