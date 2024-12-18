@@ -12,9 +12,18 @@ body {
 	max-width: 88%;
 	height: 100%;
 	color: #333333;
-	background: linear-gradient(145deg, rgba(0,31,63,1) 0%, rgba(149,109,73,1) 33%, rgba(27,69,111,1) 66%, rgba(255,181,181,1) 100%);
+	/* background: linear-gradient(145deg, rgba(0,31,63,1) 0%, rgba(149,109,73,1) 33%, rgba(27,69,111,1) 66%, rgba(255,181,181,1) 100%); */
 	/* background: linear-gradient(73deg, rgba(0,31,63,1) 0%, rgba(149,109,73,1) 33%, rgba(27,69,111,1) 66%, rgba(255,181,181,1) 100%); */
 	font-family: 'Roboto', sans-serif;
+	background: linear-gradient(145deg, 
+	#3B5066 0%, 
+	#26496C 5%,
+    rgba(0,31,63,1) 10%, 
+    rgba(149,109,73,1) 25%, 
+    rgba(27,69,111,1) 50%, 
+    rgba(255,181,181,1) 75%, 
+    #2E4E75 96%, 
+	#576381 100%);
 }
 
 h1 {
